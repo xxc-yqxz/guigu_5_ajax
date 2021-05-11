@@ -1,0 +1,12 @@
+{
+  "name": "ajax_0825",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "repository": "https://github.com/tianyucoder/200826_ajax.git",
+  "author": "xxc7 <894043590@qq.com>"
+}

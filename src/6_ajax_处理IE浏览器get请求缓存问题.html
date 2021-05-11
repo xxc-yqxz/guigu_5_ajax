@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>6_ajax_处理IE-get请求缓存问题</title>
+	<style>
+		#content {
+			width: 300px;
+			height: 100px;
+			border: 1px solid black;
+			margin-top: 10px;
+		}
+	</style>
+	<script type="text">
+		协商缓存：当第一次ajax请求发送后，下一次再发送得到的数据若相同，则会触发浏览器协商缓存。返回状态码为304的缓存文件,此时要把Disable cache 设置为未勾选。
+
+		IE强缓存机制：默认请求一样的地址获取的信息一样，不会在重新获取，而是直接从缓存中获取数据。可以使用添加时间戳让地址不同。新版IE没有此问题。
+	</script>
+</head>
+
+<body>
+	<h3>该页面是测试：ajax_处理IE-get请求缓存问题</h3>
+	<button id="btn">点我发送请求(原生js-ajax-get)</button>
+	<div id="content"></div>
+	<script type="text/javascript">
+		const btn = document.getElementById('btn')
+		const content = document.getElementById('content')
+
+		btn.onclick = function () {
+			//实例xhr
+			const xhr = new XMLHttpRequest()
+
+			//绑定监听
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4) {
+					if (xhr.status >= 200 && xhr.status < 300) {
+						// const { name, age, sex } = xhr.response
+						console.log(xhr.response);
+						// content.innerHTML = (`
+						// 		<ul>
+						// 			<li>姓名：${name}</li>
+						// 			<li>年龄：${age}</li>
+						// 			<li>性别：${sex}</li>
+						// 		<ul>
+						// 		`)
+					}
+				}
+			}
+
+			//配置请求
+			xhr.open('GET', 'http://127.0.0.1:8080/get_person?t=' + Date.now())
+
+			//responseType用于指定返回数据的格式
+			xhr.responseType = 'json'
+
+			//发送请求
+			xhr.send()
+		}
+	</script>
+</body>
+
+</html>
