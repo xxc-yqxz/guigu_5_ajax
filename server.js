@@ -17,7 +17,10 @@ app.use(express.static(__dirname + '/src'))
 app.get('/test_get', (request, response) => {
 	console.log('有人请求test_get了--携带的query参数是：', request.query);
 	/* response.setHeader('Access-Control-Allow-Origin','*')
-	response.setHeader('Access-Control-Expose-Headers','*') */
+	* 表示可以允许所有网站访问。
+	response.setHeader('Access-Control-Expose-Headers','*') 
+	expose : 暴露，表示将所有的响应头都传送给客户端。
+	*/
 	response.send('hello_test_get')
 })
 
@@ -82,11 +85,14 @@ app.post('/test_jquery_post', (request, response) => {
 /* app.options('/test_put',(request,response)=>{
 	response.setHeader('Access-Control-Allow-Origin','*')
 	response.setHeader('Access-Control-Expose-Headers','*')
+
+	// 设置什么形式的请求可以跨域
 	response.setHeader('Access-Control-Allow-Methods','*')
 	response.send()
 }) */
 
 app.put('/test_put', (request, response) => {
+	// get、post 简单请求  put、delete 预请求(在请求发出前要有会进行一次预请求（options请求），此时光设置两行响应头无法请求成功)
 	/* 	response.setHeader('Access-Control-Allow-Origin','*')
 		response.setHeader('Access-Control-Expose-Headers','*') */
 	response.send('hello_test_put')
