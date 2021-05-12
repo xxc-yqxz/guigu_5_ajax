@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>promise的几个关键问题1</title>
+	<meta charset="UTF-8">
+	<title>promise的几个关键问题1</title>
 </head>
+
 <body>
 	<!-- 
 			1.	如何改变一个Promise实例的状态?
@@ -11,15 +13,23 @@
 						(2)执行reject(reason): 如果当前是pending就会变为rejected
 						(3)执行器函数(executor)抛出异常: 如果当前是pending就会变为rejected
 	 -->
-	<script type="text/javascript" >
-		const p  = new Promise((resolve,reject)=>{
+	<script type="text/javascript">
+		/* const p = new Promise((resolve, reject) => {
+			// 状态只能改一次，结果会调用成功的回调。
+			resolve(100);
+			console.log(a); //引擎抛异常
+		}) */
+		const p = new Promise((resolve, reject) => {
 			console.log(a); //引擎抛异常
 			// throw 900 //编码抛异常
+			// 抛出异常，代码不会继续往下走了
+			console.log(1);
 		})
 		p.then(
-			value => {console.log('成功了',value);},
-			reason => {console.log('失败了',reason);}
+			value => { console.log('成功了', value); },
+			reason => { console.log('失败了', reason); }
 		)
 	</script>
 </body>
+
 </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        // test瞬间就调用完了，而把定时器给了定时器队列
+        function test() {
+            setTimeout(() => {
+                console.log(1);
+            }, 3000)
+            setTimeout(() => {
+                console.log(1);
+            }, 9000)
+            console.log(100);
+        }
+        test()
+    </script>
+</body>
+
+</html>

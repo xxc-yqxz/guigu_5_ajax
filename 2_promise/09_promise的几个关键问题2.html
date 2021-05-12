@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>promise的几个关键问题2</title>
+	<meta charset="UTF-8">
+	<title>promise的几个关键问题2</title>
 </head>
+
 <body>
-  <!-- 
+	<!-- 
 		改变Promise实例的状态和指定回调函数谁先谁后?
 					1.都有可能, 正常情况下是先指定回调再改变状态, 但也可以先改状态再指定回调
 					2.如何先改状态再指定回调?
 								延迟一会再调用then()
 					3.Promise实例什么时候才能得到数据?
 								如果先指定的回调, 那当状态发生改变时, 回调函数就会调用, 得到数据
-								如果先改变的状态, 那当指定回调时, 回调函数就会调用, 得到数据
+								如果先改变的状态, 那当指定回调时, 回调函数就会调用, 得到数据。
+								先改状态存状态，先指定回调存回调函数。  
+
+								先指定回调：
+								当定时器时间到了之后，会被推到异步队列中执行。而.then中的两个函数，会被存到p中。当Promise实例中返回resolve时，把第一个函数推到队列，否则推第二个。
+
+								先改状态：
+								.then的两个函数不会存到p中。
 	-->
-	<script type="text/javascript" >
+	<script type="text/javascript">
 		//先指定回调，后改变状态（最常见）
 		//#region 
 		/* const p = new Promise((resolve,reject)=>{
@@ -23,21 +32,22 @@
 			},4000)
 		})
 		p.then(
-			value => {console.log('成功了',value);},
+			value => {console.log('成功了',value);
 			reason => {console.log('失败了',reason);}
 		) */
 		//#endregion
-	
+
 		//先改状态，后指定回调
-		const p = new Promise((resolve,reject)=>{
+		const p = new Promise((resolve, reject) => {
 			resolve(100)
 		})
-		setTimeout(()=>{
+		setTimeout(() => {
 			p.then(
-				value => {console.log('成功了',value);},
-				reason => {console.log('失败了',reason);}
+				value => { console.log('成功了', value); },
+				reason => { console.log('失败了', reason); }
 			)
-		},2000)
+		}, 2000)
 	</script>
 </body>
+
 </html>

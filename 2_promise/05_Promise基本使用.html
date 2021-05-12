@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Promise基本使用</title>
+	<meta charset="UTF-8">
+	<title>Promise基本使用</title>
+	<script type="text">
+		如果请求的服务器是：https://api.apiopen.top2/getJoke。返回的xhr.status为0   -> 没有服务器
+		如果请求的服务器是：https://api.apiopen.top/getJoke2。返回的xhr.status为404		-> 有服务器，没有路由
+	</script>
 </head>
+
 <body>
 	<!-- 
 		1. 重要语法
@@ -30,11 +36,11 @@
 								pending ==> fulfilled
 								pending ==> rejected
 					3.状态只能改变一次！！
-					4.一个promise指定多个成功/失败回调函数, 都会调用吗?
+					4.一个promise指定多个成功/失败回调函数, 都会调用吗? 会
 	 -->
-	<script type="text/javascript" >
+	<script type="text/javascript">
 
-		const p = new Promise((resolve,reject)=>{
+		const p = new Promise((resolve, reject) => {
 			//模拟一个异步任务
 			/* setTimeout(()=>{
 				resolve('我是成功的数据')
@@ -42,24 +48,30 @@
 
 			//真正开启一个异步任务
 			const xhr = new XMLHttpRequest()
-			xhr.onreadystatechange = ()=>{
-				if(xhr.readyState === 4){
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
 					//readyState为4代表接收完毕，接收的可能是：服务器返回的成功数据、服务器返回的错误
-					if(xhr.status === 200) resolve(xhr.response)
+					if (xhr.status === 200) resolve(xhr.response)
 					else reject('请求出错')
 				}
 			}
-			xhr.open('GET','https://api.apiopen.top/getJoke')
+			xhr.open('GET', 'https://api.apiopen.top2/getJoke')
 			xhr.responseType = 'json'
 			xhr.send()
 		})
-		
+
 		p.then(
-			(value)=>{console.log('成功了1',value);}, //成功的回调-异步
-			(reason)=>{console.log('失败了1',reason);} //失败的回调-异步
+			(value) => { console.log('成功了1', value); }, //成功的回调-异步 
+			(reason) => { console.log('失败了1', reason); } //失败的回调-异步
 		)
-		console.log('@');
+
+
+		// p.then(
+		// 	(value) => { console.log('成功了2', value); }, //成功的回调-异步
+		// 	(reason) => { console.log('失败了2', reason); } //失败的回调-异步
+		// )
 
 	</script>
 </body>
+
 </html>
