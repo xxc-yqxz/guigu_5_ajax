@@ -1,0 +1,44 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "小张",
+      "age": 18
+    },
+    {
+      "id": 2,
+      "name": "小李",
+      "age": 19
+    },
+    {
+      "name": "小孙",
+      "age": "80",
+      "id": 4
+    },
+    {
+      "name": "小陈",
+      "age": "18",
+      "id": 5
+    },
+    {
+      "name": "小周",
+      "age": "34",
+      "id": 6
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "body": "老刘",
+      "subject": "前端-第一阶段"
+    },
+    {
+      "id": 2,
+      "body": "强哥",
+      "subject": "前端-第三阶段"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

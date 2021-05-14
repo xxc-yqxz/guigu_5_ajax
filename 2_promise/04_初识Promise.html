@@ -22,7 +22,7 @@
 			2.new Promise的时候，要传入一个回调函数，它是同步的回调，会立即在主线程上执行，它被称为executor函数
 			3.每一个Promise实例都有3种状态：初始化(pending)、成功(fulfilled)、失败(rejected)
 			4.每一个Promise实例在刚被new出来的那一刻，状态都是初始化(pending)
-			5.executor函数会接收到2个参数，它们都是函数，分别用形参：resolve、reject接收
+			5.executor函数会接收到2个参数，它们都是函数，分别用形参：resolve、reject接6、7；
 						1.调用resolve函数会：
 								(1).让Promise实例状态变为成功(fulfilled)
 								(2).可以指定成功的value。

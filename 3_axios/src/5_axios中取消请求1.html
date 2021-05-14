@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>5_axios中取消请求</title>
+	<script type="text/javascript" src="./js/axios.min.js"></script>
+	<script type="text">
+		压缩文件：不仅取消了换行和空格，还将变量名尽可能的缩进
+		map文件：映射文件。指定压缩文件与实际文件之间的变量映射关系。
+	</script>
+</head>
+
+<body>
+	<button id="btn">点我获取测试数据</button><br /><br />
+	<button id="btn2">取消请求</button><br /><br />
+	<script type="text/javascript">
+		const btn = document.getElementById('btn')
+		const btn2 = document.getElementById('btn2')
+		const { CancelToken } = axios //CancelToken能为一次请求“打标识”
+		let cancel
+
+		btn.onclick = async () => {
+			axios({
+				url: 'http://localhost:5000/test1?delay=3000',
+				cancelToken: new CancelToken((c) => { //c是一个函数，调用c就可以关闭本次请求
+					// c() // 直接这么写请求无法发出去。避免像xhr.abort()一样产生漏网之鱼。
+					cancel = c
+				})
+			}).then(
+				response => { console.log('成功了', response.data); },
+				error => { console.log('失败了', error); }
+			)
+		}
+
+		btn2.onclick = () => {
+			cancel()
+		}
+
+
+	</script>
+</body>
+
+</html>
